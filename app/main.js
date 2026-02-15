@@ -29,15 +29,15 @@ function alterarContexto(contexto) {
 
 focoBtn.addEventListener("click", () => {
   alterarContexto("foco");
-  focoBtn.classList.add('active')
+  focoBtn.classList.toggle('active')
 });
 
 descansoCurtoBtn.addEventListener("click", () => {
   alterarContexto("descansoCurto");
-  descansoCurtoBtn.classList.add('active')
+  descansoCurtoBtn.classList.toggle('active')
 });
 
 descansoLongoBtn.addEventListener("click", () => {
   alterarContexto("descansoLongo");
-  descansoLongoBtn.classList.add('active')
+  descansoLongoBtn.classList.toggle('active')
 });
