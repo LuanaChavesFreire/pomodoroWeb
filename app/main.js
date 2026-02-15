@@ -5,6 +5,9 @@ const descansoLongoBtn = document.querySelector(".appCardButton--longo");
 const imgBanner = document.querySelector(".appImage");
 const titulo = document.querySelector(".appTitle");
 const btns = document.querySelectorAll('.appCardButton')
+const btnMusica = document.getElementById('alternarMusica')
+const musica = new Audio('/sons/lunaRisePartOne.mp3')
+musica.loop = true
 
 function alterarContexto(contexto) {
   html.setAttribute("dataContexto", contexto);
@@ -41,3 +44,12 @@ descansoLongoBtn.addEventListener("click", () => {
   alterarContexto("descansoLongo");
   descansoLongoBtn.classList.toggle('active')
 });
+
+btnMusica.addEventListener('change', () => {
+  if (musica.paused) {
+    musica.play()
+  }
+  else {
+    musica.pause()
+  }
+})
