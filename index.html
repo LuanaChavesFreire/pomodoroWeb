@@ -16,6 +16,7 @@
         rel="stylesheet">
     <link rel="stylesheet" href="./styles.css">
     <script type="module" src="/app/main.js"></script>
+    <script type="module" src="/app/funcoesTasks.js"></script>
 </head>
 
 <body>
@@ -67,6 +68,60 @@
                         <span>Começar</span>
                     </button>
                 </div>
+            </div>
+        </section>
+        <section class="appSectionTaskContainer">
+            <div class="appSectionTaskContent">
+                <header class="appSectionActiveTask">
+                    <p class="appSectionActiveTaskLabel">#Em andamento:</p>
+                    <p class="appSectionActiveTaskDescription"></p>
+                </header>
+                <div class="appSectionTaskHeader">
+                    <h2 class="appSectionTasksHeading">Lista de tarefas:</h2>
+                    <div class="dropdownContainer">
+                        <button class="appButtonMore">
+                            <img src="/imagens/more.svg" alt="">
+                        </button>
+                        <ul class="appSectionTaskHeaderUl">
+                            <li class="appSectionTaskHeaderLi">
+                                <button class="appSectionTaskHeaderLiButton" id="btnRemoverConcluidas">
+                                    <img src="/imagens/check.svg" alt="">
+                                    Limpar tarefas concluídas
+                                </button>
+                            </li>
+                            <li class="appSectionTaskHeaderLi">
+                                <button class="appSectionTaskHeaderLiButton" id="btnRemoverTodas">
+                                    <img src="/imagens/trash.svg" alt="">
+                                    Limpar todas as tarefas
+                                </button>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <ul class="appSectionTaskList"></ul>
+                <form class="appForm--addTask hidden" aria-hidden="true">
+                    <div class="appFormField">
+                        <label class="appFormLabel">
+                            Adicionando tarefa
+                        </label>
+                        <textarea required rows="4" class="appFormTextarea" placeholder="No que você está trabalhando?"></textarea>
+                    </div>
+                    <footer class="appFormFooter">
+                        <button type="button" class="appFormFooterButton appFormFooterButtonDelete">
+                            <img src="/imagens/delete.png" alt=""> Deletar
+                        </button>
+                        <div class="splitter"></div>
+                        <button type="button" class="appFormFooterButton appFormFooterButtonCancel">
+                            <img src="/imagens/close.png" alt=""> Cancelar
+                        </button>
+                        <button class="appFormFooterButton appFormFooterButtonConfirm">
+                            <img src="/imagens/save.png" alt=""> Salvar
+                        </button>
+                    </footer>
+                </form>
+                <button class="appButton--addTask">
+                    <img src="/imagens/addCircle.png" alt=""> Adicionar nova tarefa
+                </button>
             </div>
         </section>
 
