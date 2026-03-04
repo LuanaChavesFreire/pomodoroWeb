@@ -10,7 +10,7 @@ const titulo = document.querySelector(".appTitle");
 const startPause = document.getElementById("startPause");
 const btns = document.querySelectorAll(".appCardButton");
 const btnMusica = document.getElementById("alternarMusica");
-const timer = document.getElementById("timer");
+const btnTeste = document.getElementById('modoTeste');
 const musica = new Audio("/sons/lunaRisePartOne.mp3");
 musica.loop = true;
 
@@ -21,8 +21,14 @@ function alterarContexto(contexto) {
     case "foco":
       titulo.innerHTML = `Otimize sua produtividade,<br>
                 <strong class="appTitleStrong">mergulhe no que importa.</strong>`;
-      mostrarTempo(1500);
-      startPause.onclick = () => iniciarPausar(1500);
+      if (btnTeste.checked) {
+        mostrarTempo(30);
+        startPause.onclick = () => iniciarPausar(30);
+      }
+      else {
+        mostrarTempo(1500);
+        startPause.onclick = () => iniciarPausar(1500);
+      }
       break;
     case "descansoCurto":
       titulo.innerHTML = `Que tal dar uma respirada?<br>

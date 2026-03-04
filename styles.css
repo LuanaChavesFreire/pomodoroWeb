@@ -267,9 +267,8 @@ h6 {
   padding: 1.6rem;
 }
 
-.appSectionTaskHeaderUl:hover,
-.appButtonMore:hover ~ .appSectionTaskHeaderUl {
-  display: block;
+.appSectionTaskHeaderUl{
+  display: none;
   text-align: right;
   border-radius: 0.8rem;
   border: 0.2rem solid var(--azul-royal, #144480);
@@ -425,16 +424,18 @@ h6 {
   font-family: Montserrat;
 }
 
-.appSectionTaskListItemComplete .appSectionTaskListItem {
+.appSectionTaskListItem.appSectionTaskListItemComplete {
   background: var(--fundo-card-concludo);
   cursor: inherit;
 }
 
-.appSectionTaskListItemActive .appSectionTaskListItem {
+.appSectionTaskListItemActive.appSectionTaskListItem {
   border: 2px solid #fff;
 }
 
-.appSectionTaskListItemComplete .appSectionTaskIconStatus circle {
+.appSectionTaskListItem.appSectionTaskListItemComplete
+  .appSectionTaskIconStatus
+  circle {
   fill: #00f4bf;
 }
 

@@ -3,7 +3,17 @@ const form = document.querySelector(".appForm--addTask");
 const textArea = document.querySelector(".appFormTextarea");
 const btnCancelarAddTask = document.querySelector(".appFormFooterButtonCancel");
 const listaTarefas = document.querySelector(".appSectionTaskList");
+const taskEmAndamento = document.querySelector(
+    ".appSectionActiveTaskDescription",
+);
+const showMore = document.querySelector(".appButtonMore");
+const limparTudo = document.getElementById("btnRemoverTodas");
+const limparConcluidas = document.getElementById('btnRemoverConcluidas');
+const opcoes = document.querySelector('.appSectionTaskHeaderUl')
 const tarefas = JSON.parse(localStorage.getItem("tarefas")) || [];
+
+let tarefaSelecionada = null;
+let liTarefaSelecionada = null;
 
 function atualizarTask() {
     localStorage.setItem("tarefas", JSON.stringify(tarefas));
@@ -51,6 +61,30 @@ function criarTarefa(tarefa) {
 
     botao.append(imgBotao);
     li.append(svg, paragrafo, botao);
+    if (tarefa.completa) {
+        li.classList.add("appSectionTaskListItemComplete");
+        botao.setAttribute("disabled", "disabled");
+    } else {
+        li.onclick = () => {
+            document
+                .querySelectorAll(".appSectionTaskListItem")
+                .forEach((item) =>
+                    item.classList.remove("appSectionTaskListItemActive"),
+                );
+            if (tarefaSelecionada === tarefa.descricao) {
+                taskEmAndamento.textContent = "";
+                tarefaSelecionada = null;
+                liTarefaSelecionada = null;
+                return;
+            }
+            tarefaSelecionada = tarefa.descricao;
+            liTarefaSelecionada = li;
+            taskEmAndamento.textContent = tarefa.descricao;
+
+            li.classList.add("appSectionTaskListItemActive");
+        };
+    }
+
     return li;
 }
 
@@ -61,9 +95,14 @@ form.addEventListener("submit", (evento) => {
     } else {
         const tarefa = {
             descricao: textArea.value,
+            completa: false,
         };
+        textArea.value = '';
+        form.classList.add("hidden");
         tarefas.push(tarefa);
         atualizarTask();
+        const elementoTarefa = criarTarefa(tarefa);
+        listaTarefas.append(elementoTarefa);
     }
 });
 
@@ -71,3 +110,40 @@ tarefas.forEach((tarefa) => {
     const elementoTarefa = criarTarefa(tarefa);
     listaTarefas.append(elementoTarefa);
 });
+
+document.addEventListener("focoFinalizado", () => {
+    if (tarefaSelecionada && liTarefaSelecionada) {
+        liTarefaSelecionada.classList.remove("appSectionTaskListItemActive");
+        liTarefaSelecionada.classList.add("appSectionTaskListItemComplete");
+        liTarefaSelecionada
+            .querySelector("button")
+            .setAttribute("disabled", "disabled");
+        const tarefa = tarefas.find((t) => t.descricao === tarefaSelecionada);
+        if (tarefa) {
+            tarefa.completa = true;
+            atualizarTask();
+        }
+    }
+});
+
+showMore.addEventListener('click', () => {
+    opcoes.style.display = opcoes.style.display === 'block' ? 'none' : 'block';
+})
+
+limparTudo.addEventListener('click', () => {
+    tarefas.length = 0;
+    atualizarTask();
+    listaTarefas.innerHTML = '';
+    opcoes.style.display = opcoes.style.display === 'block' ? 'none' : 'block';
+})
+
+limparConcluidas.addEventListener('click', () => {
+    tarefas.forEach(t => {
+        if (t.completa === true) {
+            tarefas.splice(tarefas.indexOf(t), 1);
+            document.querySelectorAll('.appSectionTaskListItemComplete').forEach(t => t.remove())
+        }
+    })
+    console.log(tarefas);
+    atualizarTask();
+})

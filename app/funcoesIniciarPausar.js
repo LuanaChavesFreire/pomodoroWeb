@@ -1,5 +1,6 @@
 import { mostrarTempo } from "./funcaoTimers.js";
 
+const html = document.querySelector('html');
 const startPause = document.getElementById("startPause");
 let intervaloId = null;
 let tempoRestante = 0;
@@ -31,9 +32,14 @@ const contagem = () => {
   const endAudio = new Audio("/sons/beep.mp3");
   if (tempoRestante === 0) {
     endAudio.play();
-    zerar();
     startPause.querySelector("span").textContent = "Começar";
     startPause.querySelector("img").src = "/imagens/playArrow.png";
+    const focoAtivo = html.getAttribute('dataContexto') == 'foco';
+    if (focoAtivo) {
+      const evento = new CustomEvent('focoFinalizado');
+      document.dispatchEvent(evento);
+    }
+    zerar();
     return;
   }
   tempoRestante -= 1;
