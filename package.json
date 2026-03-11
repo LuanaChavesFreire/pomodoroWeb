@@ -3,9 +3,9 @@
   "version": "1.0.0",
   "description": "PomodoroWeb",
   "scripts": {
-  "lint": "./node_modules/.bin/eslint app/*.js",
-  "test": "jest --coverage",
-  "test:ci": "jest --coverage --coverageReporters=text-summary --passWithNoTests"
+    "lint": "node ./node_modules/eslint/bin/eslint.js app/*.js",
+    "test": "node ./node_modules/jest/bin/jest.js --coverage",
+    "test:ci": "node ./node_modules/jest/bin/jest.js --coverage --coverageReporters=text-summary --passWithNoTests"
   },
   "devDependencies": {
     "eslint": "^8.57.0",
@@ -15,7 +15,7 @@
   "jest": {
     "testEnvironment": "jsdom",
     "collectCoverageFrom": [
-      "app/*.js"
+      "app/**/*.js"
     ]
   }
 }

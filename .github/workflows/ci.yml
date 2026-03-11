@@ -23,9 +23,7 @@ jobs:
         run: npm install
 
       - name: Rodar Lint (ESLint)
-        run: |
-          chmod +x ./node_modules/.bin/eslint
-          ./node_modules/.bin/eslint app/*.js
+        run: node ./node_modules/eslint/bin/eslint.js app/*.js
 
   test:
     name: Testes Unitários
@@ -44,7 +42,7 @@ jobs:
         run: npm install
 
       - name: Rodar testes com cobertura
-        run: npm run test:ci
+        run: node ./node_modules/jest/bin/jest.js --coverage --coverageReporters=text-summary --passWithNoTests
 
   ci-success:
     name: CI Aprovado
@@ -52,4 +50,4 @@ jobs:
     needs: [lint, test]
     steps:
       - name: Pipeline CI concluído!
-        run: echo "CI passou com sucesso!"
+        run: echo "✅ CI passou com sucesso!"
