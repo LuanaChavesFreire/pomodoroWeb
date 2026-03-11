@@ -12,8 +12,10 @@ jobs:
   # JOB 1: Verificação de qualidade do código (Lint)
   # -------------------------------------------------------
   lint:
-    name: Análise de Código (Lint)
-    runs-on: ubuntu-latest
+    - name: 🧹 Rodar Lint (ESLint)
+      run: |
+          chmod +x ./node_modules/.bin/eslint
+          ./node_modules/.bin/eslint app/*.js
 
     steps:
       # Passo 1: Baixa o código do repositório
